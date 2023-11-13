@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  postgres:
+    image: postgres:latest
+    container_name: task_management_db
+    environment:
+      POSTGRES_DB: task_management_db
+      POSTGRES_USER: username
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5432:5432"
+
+  rabbitmq:
+    image: "rabbitmq:3.12.8-management"
+    container_name: "rabbitmq-container"
+    ports:
+      - "5672:5672"  # RabbitMQ default port
+      - "15672:15672"  # RabbitMQ management plugin port
+    environment:
+      - RABBITMQ_DEFAULT_USER=guest
+      - RABBITMQ_DEFAULT_PASS=guest
