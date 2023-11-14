@@ -15,8 +15,23 @@ services:
     image: "rabbitmq:3.12.8-management"
     container_name: "rabbitmq-container"
     ports:
-      - "5672:5672"  # RabbitMQ default port
-      - "15672:15672"  # RabbitMQ management plugin port
-    environment:
-      - RABBITMQ_DEFAULT_USER=guest
-      - RABBITMQ_DEFAULT_PASS=guest
+      - "5672:5672"
+      - "15672:15672"
+
+  app1:
+    image: "task-management:latest"
+    container_name: "task-app-1"
+    ports:
+      - "8081:8080"
+    depends_on:
+      - postgres
+      - rabbitmq
+
+  app2:
+    image: "task-management:latest"
+    container_name: "task-app-2"
+    ports:
+      - "8082:8080"
+    depends_on:
+      - postgres
+      - rabbitmq

@@ -11,4 +11,4 @@ COPY target/taskManagement-0.0.1-SNAPSHOT.jar /app/taskManagement-0.0.1-SNAPSHOT
 EXPOSE 8080
 
 # Run the JAR file
-CMD ["java", "-jar", "taskManagement-0.0.1-SNAPSHOT.jar"]
+CMD ["java", "-jar", "-Dserver.address=0.0.0.0", "-Dserver.port=8080", "taskManagement-0.0.1-SNAPSHOT.jar"]
