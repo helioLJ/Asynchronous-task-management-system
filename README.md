@@ -8,7 +8,7 @@ Welcome to the Task Management System, a robust Java Spring Boot application des
 
 The project embraces a Microservices Architecture, promoting modularity, scalability, and resilience. Each aspect of task management, from creation to assignment, is encapsulated within independent, loosely coupled microservices.
 
-![mermaid diagram](https://i.imgur.com/LX3k9FC.png)
+![mermaid diagram](https://i.imgur.com/uyI4wKt.png)
 
 ## Project Structure
 
