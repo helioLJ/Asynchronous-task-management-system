@@ -26,7 +26,7 @@ The project follows a modular structure to enhance maintainability and scalabili
 - **Docker**: Containerization for easy deployment and scalability.
 - **RabbitMQ**: Asynchronous messaging for efficient task assignment.
 - **PostgreSQL Database**: Utilizes a relational database for storing task information.
-- **Asynchronous Processing with @Async from Spring Boot**: Implements concurrency and parallelism for efficient task processing.
+- **Asynchronous Processing with @Async from Spring Boot**: Implements parallelism for efficient task processing.
 - **NGINX**: Efficiently handles load balancing and acts as a reverse proxy for the microservices.
 
 
@@ -56,9 +56,9 @@ Dockerize the application for simplified deployment:
 
 RabbitMQ is integrated into the system to handle asynchronous communication. Task assignment events are processed efficiently, ensuring responsiveness.
 
-## Concurrency and Parallelism
+## Parallelism
 
-Task processing is optimized through concurrent mechanisms. Utilizing Spring's `@Async` to parallelize task processing, enhancing system performance.
+Task processing is optimized through parallel mechanisms. Utilizing Spring's `@Async` to parallelize task processing, enhancing system performance.
 
 ## Design and Architecture Patterns
 
