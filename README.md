@@ -15,6 +15,7 @@ The project embraces a Microservices Architecture, promoting modularity, scalabi
 The project follows a modular structure to enhance maintainability and scalability:
 
 - **`src/main/java`**: Java source code.
+- **`src/test/java`**: Unitary and integration tests for controller and services.
 - **`src/main/resources`**: Configuration files.
 - **`docker-compose.yml`**: Docker Compose configuration.
 
@@ -40,14 +41,14 @@ Dockerize the application for simplified deployment:
 1. Build the jar file: `mvn clean install`
 2. Build the Docker image: `docker build -t task-management-system .`
 
-### Running with full system with Docker
+#### Running with full system with Docker
 
 1. Run the docker containers: `docker compose up`
 2. Access the application at [http://localhost:8080](http://localhost:8080)
 
-### Running application locally
+#### Running application locally
 
-1. Put PostgreSQL and RabbitMQ containers up: `docker-compose up postgres rabbitmq` 
+1. Put PostgreSQL and RabbitMQ containers up: `docker compose up postgres rabbitmq` 
 2. Run the Spring Boot application: `./mvnw spring-boot:run`
 3. Access the application at [http://localhost:8080](http://localhost:8080)
 
