@@ -1,4 +1,4 @@
-package com.helio.taskManagement.messaging;
+package com.helio.taskManagement.messaging.producers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,7 +18,7 @@ public class RabbitMQProducer {
         this.rabbitTemplate = rabbitTemplate;
     }
     public void sendMessage(String message) {
-        LOGGER.info(String.format("Message sent -> %s", message));
+        LOGGER.info(String.format("\uD83D\uDC30 Message sent -> %s \uD83D\uDCE4", message));
         rabbitTemplate.convertAndSend(exchangeName, routingKey, message);
     }
 }

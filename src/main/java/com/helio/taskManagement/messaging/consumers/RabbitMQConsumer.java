@@ -1,4 +1,4 @@
-package com.helio.taskManagement.messaging;
+package com.helio.taskManagement.messaging.consumers;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -10,6 +10,6 @@ public class RabbitMQConsumer {
     private static final Logger LOGGER = LoggerFactory.getLogger(RabbitMQConsumer.class);
     @RabbitListener(queues = {"${rabbitmq.queue.name}"})
     public void consume(String message) {
-        LOGGER.info(String.format("Received message -> %s", message));
+        LOGGER.info(String.format("\uD83D\uDC30 Received message -> %s \uD83D\uDCE9", message));
     }
 }

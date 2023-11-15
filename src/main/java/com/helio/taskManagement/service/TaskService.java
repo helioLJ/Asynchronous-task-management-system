@@ -1,7 +1,7 @@
 package com.helio.taskManagement.service;
 
-import com.helio.taskManagement.messaging.RabbitMQJsonProducer;
-import com.helio.taskManagement.messaging.RabbitMQProducer;
+import com.helio.taskManagement.messaging.producers.RabbitMQJsonProducer;
+import com.helio.taskManagement.messaging.producers.RabbitMQProducer;
 import com.helio.taskManagement.model.Task;
 import com.helio.taskManagement.model.User;
 import com.helio.taskManagement.repository.TaskRepository;
@@ -48,7 +48,6 @@ public class TaskService {
 
         Task task = optionalTask.get();
         task.setAssignedUser(assignedUser);
-        System.out.println("recener");
         String message = String.format("Hey, %s was assigned with Task %s", assignedUser.getUsername(), task.getDescription());
         rabbitMQProducer.sendMessage(message);
         rabbitMQJsonProducer.sendJsonMessage(task);

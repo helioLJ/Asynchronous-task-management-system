@@ -1,4 +1,4 @@
-package com.helio.taskManagement.messaging;
+package com.helio.taskManagement.messaging.producers;
 
 import com.helio.taskManagement.model.Task;
 import org.slf4j.Logger;
@@ -22,7 +22,7 @@ public class RabbitMQJsonProducer {
     }
 
     public void sendJsonMessage(Task task) {
-        LOGGER.info(String.format("Json message sent -> %s", task.toString()));
+        LOGGER.info(String.format("\uD83D\uDC30 Json message sent -> %s \uD83D\uDCE4", task.toString()));
         rabbitTemplate.convertAndSend(exchangeName, routingJsonKey, task);
     }
 }

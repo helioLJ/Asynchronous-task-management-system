@@ -35,3 +35,14 @@ services:
     depends_on:
       - postgres
       - rabbitmq
+
+  load-balancer:
+    image: nginx:latest
+    container_name: task-load-balancer
+    ports:
+      - "8080:80"
+    depends_on:
+      - app1
+      - app2
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro

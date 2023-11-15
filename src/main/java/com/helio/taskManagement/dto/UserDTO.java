@@ -3,6 +3,6 @@ package com.helio.taskManagement.dto;
 import lombok.Data;
 
 @Data
-public class TaskDTO {
-    private String description;
+public class UserDTO {
+    String username;
 }
