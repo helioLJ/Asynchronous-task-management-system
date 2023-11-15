@@ -23,6 +23,9 @@ services:
     container_name: "task-app-1"
     ports:
       - "8081:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/task_management_db
+      SPRING_RABBITMQ_HOST: rabbitmq
     depends_on:
       - postgres
       - rabbitmq
@@ -32,6 +35,9 @@ services:
     container_name: "task-app-2"
     ports:
       - "8082:8080"
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:postgresql://postgres:5432/task_management_db
+      SPRING_RABBITMQ_HOST: rabbitmq
     depends_on:
       - postgres
       - rabbitmq
