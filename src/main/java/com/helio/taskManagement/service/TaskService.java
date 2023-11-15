@@ -1,20 +1,26 @@
 package com.helio.taskManagement.service;
 
+import com.helio.taskManagement.factory.TaskFactory;
 import com.helio.taskManagement.messaging.producers.RabbitMQJsonProducer;
 import com.helio.taskManagement.messaging.producers.RabbitMQProducer;
 import com.helio.taskManagement.model.Task;
 import com.helio.taskManagement.model.User;
+import com.helio.taskManagement.observer.TaskObserver;
 import com.helio.taskManagement.repository.TaskRepository;
 import com.helio.taskManagement.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
 @Service
 public class TaskService {
+    private List<TaskObserver> observers = new ArrayList<>();
+    @Autowired
+    private TaskFactory taskFactory;
     @Autowired
     private TaskRepository taskRepository;
     @Autowired
@@ -23,7 +29,15 @@ public class TaskService {
     private RabbitMQProducer rabbitMQProducer;
     @Autowired
     private RabbitMQJsonProducer rabbitMQJsonProducer;
+    public void addObserver(TaskObserver observer) {
+        observers.add(observer);
+    }
 
+    private void notifyObservers(Task task) {
+        for (TaskObserver observer : observers) {
+            observer.update(task);
+        }
+    }
     @Async
     public Task createTask(Task task) {
 //        System.out.println("Async method start: " + Thread.currentThread().getName());
@@ -34,8 +48,9 @@ public class TaskService {
 //            e.printStackTrace();
 //        }
 //        System.out.println("Async method end: " + Thread.currentThread().getName());
+        Task newTask = taskFactory.createTask(task.getDescription());
 
-        return taskRepository.save(task);
+        return taskRepository.save(newTask);
     }
 
     public Task assignTask(Long taskId, Long userId) {
@@ -48,6 +63,7 @@ public class TaskService {
 
         Task task = optionalTask.get();
         task.setAssignedUser(assignedUser);
+        notifyObservers(task);
         String message = String.format("Hey, %s was assigned with Task %s", assignedUser.getUsername(), task.getDescription());
         rabbitMQProducer.sendMessage(message);
         rabbitMQJsonProducer.sendJsonMessage(task);
