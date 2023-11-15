@@ -7,6 +7,7 @@ import com.helio.taskManagement.model.User;
 import com.helio.taskManagement.repository.TaskRepository;
 import com.helio.taskManagement.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,7 +24,17 @@ public class TaskService {
     @Autowired
     private RabbitMQJsonProducer rabbitMQJsonProducer;
 
+    @Async
     public Task createTask(Task task) {
+//        System.out.println("Async method start: " + Thread.currentThread().getName());
+//        try {
+//            // Simulate a time-consuming task
+//            Thread.sleep(5000);
+//        } catch (InterruptedException e) {
+//            e.printStackTrace();
+//        }
+//        System.out.println("Async method end: " + Thread.currentThread().getName());
+
         return taskRepository.save(task);
     }
 
@@ -37,6 +48,7 @@ public class TaskService {
 
         Task task = optionalTask.get();
         task.setAssignedUser(assignedUser);
+        System.out.println("recener");
         String message = String.format("Hey, %s was assigned with Task %s", assignedUser.getUsername(), task.getDescription());
         rabbitMQProducer.sendMessage(message);
         rabbitMQJsonProducer.sendJsonMessage(task);
