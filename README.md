@@ -2,7 +2,7 @@
 
 ## Overview
 
-Welcome to the Task Management System, a robust Java Spring Boot application designed to streamline task creation, assignment, and tracking. This README provides essential technical information about the project, explaining its architecture, design decisions, and how to get started.
+Task Management System, a robust Java Spring Boot application designed to streamline task creation, assignment, and tracking. This README provides essential technical information about the project, explaining its architecture, design decisions, and how to get started.
 
 # Microservices Architecture
 
